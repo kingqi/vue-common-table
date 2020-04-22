@@ -1,0 +1,50 @@
+{
+  "name": "vue-table",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "pre": "cnpm install || yarn --registry https://registry.npm.taobao.org || npm install --registry https://registry.npm.taobao.org ",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build --target lib --name common-table ./src/components/index.js",
+    "lint": "eslint --fix --ext .vue,.js src/ &&　prettier src/**/*.scss --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kingqi/vue-common-table.git"
+  },
+  "dependencies": {
+    "core-js": "^3.6.4",
+    "element-ui": "^2.13.1",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.3.0",
+    "@vue/cli-plugin-eslint": "~4.3.0",
+    "@vue/cli-service": "~4.3.0",
+    "babel-eslint": "^10.1.0",
+    "chai": "^4.1.2",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "node-sass": "^4.12.0",
+    "prettier": "1.19.1",
+    "sass-loader": "^7.0.1",
+    "vue-template-compiler": "^2.6.11",
+    "webpack-bundle-analyzer": "^3.0.3"
+  },
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*"
+  ],
+  "keywords": [
+    "Vue",
+    "Element UI",
+    "table"
+  ],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

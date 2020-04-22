@@ -1,0 +1,45 @@
+<template>
+  <el-table-column
+    v-if="column.slot"
+    v-bind="elAttrs"
+  >
+    <slot
+      slot-scope="{ row }"
+      v-bind="row"
+    />
+  </el-table-column>
+  <el-table-column
+    v-else
+    v-bind="elAttrs"
+  />
+</template>
+
+<script>
+import { deepClone } from '../utils/util'
+import { elTableColumnAttrs } from '../utils/config'
+
+export default {
+  props: {
+    column: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+  computed: {
+    elAttrs() {
+      const copy = deepClone(this.column)
+      for (const key in copy) {
+        if (
+          Object.hasOwnProperty.call(copy, key) &&
+          !elTableColumnAttrs.includes(key)
+        ) {
+          delete copy[key]
+        }
+      }
+      return copy
+    }
+  }
+}
+</script>
+
+<style></style>
