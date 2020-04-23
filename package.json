@@ -1,11 +1,11 @@
 {
-  "name": "vue-table",
-  "version": "0.1.0",
-  "private": true,
+  "name": "vue-common-table",
+  "version": "1.0.0",
+  "main": "src/components/index.js",
+  "author": "Louis <liukangqi56@gmail.com>",
   "scripts": {
     "pre": "cnpm install || yarn --registry https://registry.npm.taobao.org || npm install --registry https://registry.npm.taobao.org ",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name common-table ./src/components/index.js",
     "lint": "eslint --fix --ext .vue,.js src/ &&　prettier src/**/*.scss --write"
   },
   "repository": {

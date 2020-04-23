@@ -8,7 +8,7 @@
       v-on="$listeners"
     >
       <el-table-column
-        v-if="config.enableSelect"
+        v-if="enableMultiSelect"
         type="selection"
         width="55"
       />
@@ -28,7 +28,7 @@
         </template>
       </table-column>
       <el-table-column
-        v-if="config.showHandler"
+        v-if="showHandler"
         v-bind="handlerColumn"
       >
         <slot
@@ -69,7 +69,7 @@ export default {
     config: {
       type: Object,
       default: () => ({
-        enableSelect: false,
+        enableMultiSelect: false,
         showHandler: false,
         handlerColumn: {},
         enablePagination: false
@@ -89,19 +89,20 @@ export default {
     return {}
   },
   computed: {
-    enableSelect() {
-      return this.config.enableSelect || false
+    enableMultiSelect() {
+      return this.config.enableMultiSelect || false
     },
     showHandler() {
       return this.config.showHandler || false
     },
     handlerColumn() {
-      return (
-        this.config.handlerColumn || {
+      return Object.assign(
+        {
           label: '操作',
           minWidth: 100,
           fixed: 'right'
-        }
+        },
+        this.config.handlerColumn
       )
     },
     enablePagination() {
@@ -126,8 +127,35 @@ export default {
     },
     handleSizeChange(val) {
       this.$emit('pageSizeChange', val)
+    },
+    clearSelection() {
+      return this.$refs['table'].clearSelection(...arguments)
+    },
+    toggleRowSelection() {
+      return this.$refs['table'].toggleRowSelection(...arguments)
+    },
+    toggleAllSelection() {
+      return this.$refs['table'].toggleAllSelection(...arguments)
+    },
+    toggleRowExpansion() {
+      return this.$refs['table'].toggleRowExpansion(...arguments)
+    },
+    setCurrentRow() {
+      return this.$refs['table'].setCurrentRow(...arguments)
+    },
+    clearSort() {
+      return this.$refs['table'].clearSort(...arguments)
+    },
+    clearFilter() {
+      return this.$refs['table'].clearFilter(...arguments)
+    },
+    doLayout() {
+      return this.$refs['table'].doLayout(...arguments)
+    },
+    sort() {
+      return this.$refs['table'].sort(...arguments)
     }
   }
 }
 </script>
-<style lang="scss" scoped></style>
+<style scoped></style>
