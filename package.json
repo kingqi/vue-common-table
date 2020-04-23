@@ -1,6 +1,6 @@
 {
   "name": "vue-common-table",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/components/index.js",
   "author": "Louis <liukangqi56@gmail.com>",
   "scripts": {
