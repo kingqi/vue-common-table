@@ -12,7 +12,7 @@
     />
     <div class="page-button">
       <el-button
-        size="small"
+        size="mini"
         type="primary"
       >
         跳转
@@ -45,7 +45,7 @@ export default {
       return this.pageConfig.pageSizes || [10, 20, 30, 50, 100]
     },
     layout() {
-      return this.pageConfig.layout || 'total,sizes,prev,pager,next,jumper'
+      return this.pageConfig.layout || 'total,sizes,prev,pager,next,jumper,->'
     },
     customClassName() {
       return this.pageConfig.customClassName || ''
@@ -82,6 +82,6 @@ export default {
   margin-top: 12px;
 }
 .page-button {
-  margin-left: 20px;
+  margin-left: 12px;
 }
 </style>

@@ -14,7 +14,7 @@
           type="text"
           @click="handleSelectionClick(selection)"
         >
-          确定
+          删除
         </el-button>
       </template>
       <template

@@ -2,9 +2,9 @@
   <div>
     <div
       v-if="enableMultiSelect && selection.length > 0"
-      class="multi-tip"
+      class="multi-menu"
     >
-      <span>已选中{{ selection.length }}项</span>
+      <span style="margin-left:12px;">已选中{{ selection.length }}项</span>
       <el-divider direction="vertical" />
       <slot
         name="multiSelectMenu"
@@ -14,6 +14,12 @@
         class="el-icon-close btn-close"
         @click="selectionClear"
       />
+    </div>
+    <div
+      v-else-if="enableMultiSelect"
+      class="top-menu"
+    >
+      <slot name="topMenu" />
     </div>
     <el-table
       ref="table"
@@ -52,10 +58,10 @@
           slot-scope="props"
         >
           <slot
-            :name="column.prop+'-header'"
+            :name="column.prop + '-header'"
             v-bind="props"
           />
-        </template> 
+        </template>
       </table-column>
       <el-table-column
         v-if="showHandler"
@@ -235,19 +241,25 @@ export default {
 /deep/ .row__active {
   background: #f2f2f2;
 }
-.multi-tip {
-  display: inline;
-  line-height: 30px;
-  padding-left:10px;
+.multi-menu {
+  display: inline-block;
+  width: 100%;
+  line-height: 40px;
+  height: 40px;
+  margin-bottom: 12px;
 }
-.multi-tip .el-button {
+.multi-menu .el-button {
   padding-top: 0;
   padding-bottom: 0;
 }
 .btn-close {
-  line-height: 30px;
+  line-height: 40px;
   margin-right: 10px;
   float: right;
   cursor: pointer;
+}
+.top-menu {
+  height: 40px;
+  margin-bottom: 12px;
 }
 </style>
