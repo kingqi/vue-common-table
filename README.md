@@ -44,7 +44,8 @@
 
 ### Slot
 
-| name            | 说明                                                |          参数           |
-| :-------------- | :-------------------------------------------------- | :---------------------: |
-| 列的prop值      | 自定义列的内容,当列的slot属性设置为true时有效       | { row, column, $index } |
-| multiSelectMenu | 自定义多选操作列内容，enableMultiSelect为true时有效 |      { selection }      |
+| name                   | 说明                                                |          参数           |
+| :--------------------- | :-------------------------------------------------- | :---------------------: |
+| 列的prop值             | 自定义列的内容,当列的slot属性设置为true时有效       | { row, column, $index } |
+| 列的prop值 + '-header' | 自定义表头的内容,当列的slot属性设置为true时有效     |   { column, $index }    |
+| multiSelectMenu        | 自定义多选操作列内容，enableMultiSelect为true时有效 |      { selection }      |
