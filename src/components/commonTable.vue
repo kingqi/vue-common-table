@@ -1,16 +1,36 @@
 <template>
   <div>
+    <div
+      v-if="enableMultiSelect && selection.length > 0"
+      class="multi-tip"
+    >
+      <span>已选中{{ selection.length }}项</span>
+      <el-divider direction="vertical" />
+      <slot
+        name="multiSelectMenu"
+        :selection="selection"
+      />
+      <i
+        class="el-icon-close btn-close"
+        @click="selectionClear"
+      />
+    </div>
     <el-table
       ref="table"
       v-loading="loading"
       :data="data"
       v-bind="elAttrs"
-      v-on="$listeners"
+      v-on="listeners"
     >
       <el-table-column
         v-if="enableMultiSelect"
         type="selection"
         width="55"
+      />
+      <el-table-column
+        v-if="showIndexColumn"
+        type="index"
+        width="50"
       />
       <table-column
         v-for="column in columns"
@@ -19,13 +39,23 @@
       >
         <template
           v-if="column.slot"
-          slot-scope="row"
+          slot-scope="props"
         >
           <slot
             :name="column.prop"
-            :row="row"
+            v-bind="props"
           />
         </template>
+        <template
+          v-if="column.slot"
+          slot="header"
+          slot-scope="props"
+        >
+          <slot
+            :name="column.prop+'-header'"
+            v-bind="props"
+          />
+        </template> 
       </table-column>
       <el-table-column
         v-if="showHandler"
@@ -72,7 +102,9 @@ export default {
         enableMultiSelect: false,
         showHandler: false,
         handlerColumn: {},
-        enablePagination: false
+        enablePagination: false,
+        highlightSelect: true,
+        showIndexColumn: true
       })
     },
     pageConfig: { type: Object, default: () => ({}) },
@@ -86,15 +118,28 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      selection: []
+    }
   },
   computed: {
+    // 是否启用多选
     enableMultiSelect() {
       return this.config.enableMultiSelect || false
     },
+    // 是否展示操作列
     showHandler() {
       return this.config.showHandler || false
     },
+    // 是否高亮勾选行
+    highlightSelect() {
+      return this.config.highlightSelect !== false ? true : false
+    },
+    // 是否展示序号列
+    showIndexColumn() {
+      return this.config.showIndexColumn !== false ? true : false
+    },
+    // 操作列配置
     handlerColumn() {
       return Object.assign(
         {
@@ -108,6 +153,7 @@ export default {
     enablePagination() {
       return this.config.enablePagination || false
     },
+    // el-table组件属性
     elAttrs() {
       const copy = deepClone(this.config)
       for (const key in copy) {
@@ -118,7 +164,18 @@ export default {
           delete copy[key]
         }
       }
+      if (this.highlightSelect) {
+        Object.assign(copy, {
+          'row-class-name': this.rowClassName
+        })
+      }
       return copy
+    },
+    // el-table监听事件
+    listeners() {
+      return Object.assign({}, this.$listeners, {
+        'selection-change': this.handleSelectionChange
+      })
     }
   },
   methods: {
@@ -127,6 +184,22 @@ export default {
     },
     handleSizeChange(val) {
       this.$emit('pageSizeChange', val)
+    },
+    handleSelectionChange(selection) {
+      this.selection = selection
+    },
+    // 高亮当前选中行
+    rowClassName({ row }) {
+      for (let index = 0; index < this.selection.length; index++) {
+        if (this.selection[index] === row) {
+          return 'row__active'
+        }
+      }
+      return ''
+    },
+    selectionClear() {
+      this.selectionList = []
+      this.$refs['table'].clearSelection()
     },
     clearSelection() {
       return this.$refs['table'].clearSelection(...arguments)
@@ -158,4 +231,23 @@ export default {
   }
 }
 </script>
-<style scoped></style>
+<style scoped>
+/deep/ .row__active {
+  background: #f2f2f2;
+}
+.multi-tip {
+  display: inline;
+  line-height: 30px;
+  padding-left:10px;
+}
+.multi-tip .el-button {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.btn-close {
+  line-height: 30px;
+  margin-right: 10px;
+  float: right;
+  cursor: pointer;
+}
+</style>

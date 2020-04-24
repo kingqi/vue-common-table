@@ -7,10 +7,27 @@
       @selection-change="handleSelectionChange"
     >
       <template
+        slot="multiSelectMenu"
+        slot-scope="{ selection }"
+      >
+        <el-button
+          type="text"
+          @click="handleSelectionClick(selection)"
+        >
+          确定
+        </el-button>
+      </template>
+      <template
         slot="name"
         slot-scope="{ row }"
       >
         <el-tag>{{ row.name }}</el-tag>
+      </template>
+      <template
+        slot="name-header"
+        slot-scope="{ column }"
+      >
+        <el-tag>{{ column.label }}</el-tag>
       </template>
       <template slot="handler">
         <el-button type="text">
@@ -65,24 +82,26 @@ export default {
       ],
       tableConfig: {
         showHandler: true,
-        enableSelect: true
+        enableMultiSelect: true
       },
     }
   },
   methods: {
     handleSelectionChange(val) {
       console.log(val)
+    },
+    handleSelectionClick(selection){
+      console.log('selection:',selection)
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style >
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }

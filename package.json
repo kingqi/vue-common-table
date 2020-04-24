@@ -1,6 +1,7 @@
 {
   "name": "vue-common-table",
   "version": "1.0.1",
+  "license": "MIT",
   "main": "src/components/index.js",
   "author": "Louis <liukangqi56@gmail.com>",
   "scripts": {
@@ -26,9 +27,7 @@
     "eslint": "^6.8.0",
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-vue": "^6.2.2",
-    "node-sass": "^4.12.0",
     "prettier": "1.19.1",
-    "sass-loader": "^7.0.1",
     "vue-template-compiler": "^2.6.11",
     "webpack-bundle-analyzer": "^3.0.3"
   },

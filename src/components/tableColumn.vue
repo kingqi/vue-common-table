@@ -4,9 +4,19 @@
     v-bind="elAttrs"
   >
     <slot
-      slot-scope="{ row }"
-      v-bind="row"
-    />
+      slot-scope="scope"
+      v-bind="scope"
+    >
+      {{ scope.row[scope.column.property] }}
+    </slot>
+    <slot
+      slot="header"
+      slot-scope="scope"
+      name="header"
+      v-bind="scope"
+    >
+      {{ scope.column.label }}
+    </slot>
   </el-table-column>
   <el-table-column
     v-else

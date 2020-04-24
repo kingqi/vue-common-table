@@ -17,9 +17,9 @@
 
 除此之外支持所有el-table-column attributes
 
-| 参数 | 说明     |  类型   | 默认值 |
-| :--- | :------- | :-----: | :----: |
-| slot | 自定义列 | Boolean | false  |
+| 参数 | 说明                       |  类型   | 默认值 |
+| :--- | :------------------------- | :-----: | :----: |
+| slot | 开启slot支持，用于自定义列 | Boolean | false  |
 
 ### Config Attributes
 
@@ -40,3 +40,11 @@
 | 参数            | 说明                  |  类型  | 默认值 |
 | :-------------- | :-------------------- | :----: | :----: |
 | customClassName | 自定义分页器className | String |   -    |
+
+
+### Slot
+
+| name            | 说明                                                |          参数           |
+| :-------------- | :-------------------------------------------------- | :---------------------: |
+| 列的prop值      | 自定义列的内容,当列的slot属性设置为true时有效       | { row, column, $index } |
+| multiSelectMenu | 自定义多选操作列内容，enableMultiSelect为true时有效 |      { selection }      |
