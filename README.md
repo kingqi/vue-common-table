@@ -44,9 +44,22 @@
 
 ### Slot
 
-| name                   | 说明                                                |          参数           |
-| :--------------------- | :-------------------------------------------------- | :---------------------: |
-| 列的prop值             | 自定义列的内容,当列的slot属性设置为true时有效       | { row, column, $index } |
-| 列的prop值 + '-header' | 自定义表头的内容,当列的slot属性设置为true时有效     |   { column, $index }    |
-| multiSelectMenu        | 自定义多选操作列内容，enableMultiSelect为true时有效 |      { selection }      |
-| topMenu                | 自定义顶部操作                                      |            -            |
+| name                   | 说明                                                              |          参数           |
+| :--------------------- | :---------------------------------------------------------------- | :---------------------: |
+| 列的prop值             | 自定义列的内容,当列的slot属性设置为true时有效                     | { row, column, $index } |
+| 列的prop值 + '-header' | 自定义表头的内容,当列的slot属性设置为true时有效                   |   { column, $index }    |
+| multiSelectMenu        | 自定义多选操作列内容，enableMultiSelect为true时有效，勾选行时显示 |      { selection }      |
+| topMenu                | 自定义顶部操作 ，勾选行时不显示                                   |            -            |
+
+### Events
+
+除此之外支持所有el-table events
+
+| 事件名称            | 说明                     |   参数   |
+| :------------------ | :----------------------- | :------: |
+| current-page-change | currentPage 改变时会触发 |  当前页  |
+| page-size-change    | pageSize 改变时会触发    | 每页条数 |
+
+### Methods
+
+支持所有el-table的methods

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!--批量操作栏，勾选行时显示-->
     <div
       v-if="enableMultiSelect && selection.length > 0"
       class="multi-menu"
@@ -15,8 +16,9 @@
         @click="selectionClear"
       />
     </div>
+    <!--顶部操作栏占位，勾选行时不显示-->
     <div
-      v-else-if="enableMultiSelect"
+      v-else
       class="top-menu"
     >
       <slot name="topMenu" />
@@ -193,6 +195,7 @@ export default {
     },
     handleSelectionChange(selection) {
       this.selection = selection
+      this.$listeners['selection-change'].call(this, selection)
     },
     // 高亮当前选中行
     rowClassName({ row }) {
@@ -239,7 +242,7 @@ export default {
 </script>
 <style scoped>
 /deep/ .row__active {
-  background: #f2f2f2;
+  background: #f7fcff;
 }
 .multi-menu {
   display: inline-block;
