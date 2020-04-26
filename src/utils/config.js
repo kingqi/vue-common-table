@@ -25,7 +25,7 @@ export const elTableAttrs = [
   'headerCellClassName',
   'headerCellStyle',
   'highlightCurrentRow',
-  ' currentRowKey',
+  'currentRowKey',
   'emptyText',
   'expandRowKeys',
   'defaultExpandAll',

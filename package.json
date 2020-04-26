@@ -1,6 +1,6 @@
 {
   "name": "vue-common-table",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "main": "src/components/index.js",
   "author": "Louis <liukangqi56@gmail.com>",
@@ -32,9 +32,7 @@
     "webpack-bundle-analyzer": "^3.0.3"
   },
   "files": [
-    "dist/*",
-    "src/*",
-    "public/*"
+    "src/*"
   ],
   "keywords": [
     "Vue",
