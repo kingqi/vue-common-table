@@ -65,10 +65,10 @@ export default {
   },
   methods: {
     handleCurrentChange(val) {
-      this.$emit('currentChange', val)
+      this.$emit('current-change', val)
     },
     handleSizeChange(val) {
-      this.$emit('sizeChange', val)
+      this.$emit('size-change', val)
     }
   }
 }

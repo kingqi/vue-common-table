@@ -188,14 +188,14 @@ export default {
   },
   methods: {
     handleCurrentChange(val) {
-      this.$emit('currentPageChange', val)
+      this.$emit('current-page-change', val)
     },
     handleSizeChange(val) {
-      this.$emit('pageSizeChange', val)
+      this.$emit('page-size-change', val)
     },
     handleSelectionChange(selection) {
       this.selection = selection
-      this.$listeners['selection-change'].call(this, selection)
+      this.$emit('selection-change', selection)
     },
     // 高亮当前选中行
     rowClassName({ row }) {
