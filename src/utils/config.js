@@ -35,8 +35,8 @@ export const elTableAttrs = [
   'selectOnIndeterminate',
   'indent',
   'treeProps',
-  'lazy'
-  // 'load',
+  'lazy',
+  'load',
 ]
 
 export const elTableColumnAttrs = [
