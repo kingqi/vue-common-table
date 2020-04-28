@@ -77,6 +77,7 @@
       </el-table-column>
     </el-table>
     <table-pagination
+      v-if="enablePagination"
       :page="page"
       :page-config="pageConfig"
       @size-change="handleSizeChange"
@@ -112,7 +113,8 @@ export default {
         handlerColumn: {},
         enablePagination: false,
         highlightSelect: true,
-        showIndexColumn: true
+        showIndexColumn: true,
+        defaultKey: 'id'
       })
     },
     pageConfig: { type: Object, default: () => ({}) },
@@ -135,6 +137,10 @@ export default {
     enableMultiSelect() {
       return this.config.enableMultiSelect || false
     },
+    // 是否启用分页
+    enablePagination() {
+      return this.config.enablePagination || false
+    },
     // 是否展示操作列
     showHandler() {
       return this.config.showHandler || false
@@ -147,6 +153,10 @@ export default {
     showIndexColumn() {
       return this.config.showIndexColumn !== false ? true : false
     },
+    // 数据唯一key
+    defaultKey() {
+      return this.config.defaultKey || 'id'
+    },
     // 操作列配置
     handlerColumn() {
       return Object.assign(
@@ -157,9 +167,6 @@ export default {
         },
         this.config.handlerColumn
       )
-    },
-    enablePagination() {
-      return this.config.enablePagination || false
     },
     // el-table组件属性
     elAttrs() {

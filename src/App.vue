@@ -82,7 +82,8 @@ export default {
       ],
       tableConfig: {
         showHandler: true,
-        enableMultiSelect: true
+        enableMultiSelect: true,
+        // enablePagination:true
       },
     }
   },
