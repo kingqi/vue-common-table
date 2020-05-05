@@ -31,7 +31,7 @@ export default {
       type: Object,
       default: () => ({
         currentPage: 1,
-        size: 10,
+        size: 3,
         total: 0
       })
     },

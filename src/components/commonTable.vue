@@ -114,7 +114,7 @@ export default {
         enablePagination: false,
         highlightSelect: true,
         showIndexColumn: true,
-        defaultKey: 'id'
+        uniqueKey: 'id'
       })
     },
     pageConfig: { type: Object, default: () => ({}) },
@@ -122,7 +122,7 @@ export default {
       type: Object,
       default: () => ({
         currentPage: 1,
-        size: 10,
+        size: 3,
         total: 0
       })
     }
@@ -154,8 +154,8 @@ export default {
       return this.config.showIndexColumn !== false ? true : false
     },
     // 数据唯一key
-    defaultKey() {
-      return this.config.defaultKey || 'id'
+    uniqueKey() {
+      return this.config.uniqueKey || 'id'
     },
     // 操作列配置
     handlerColumn() {
@@ -189,7 +189,25 @@ export default {
     // el-table监听事件
     listeners() {
       return Object.assign({}, this.$listeners, {
-        'selection-change': this.handleSelectionChange
+        select: this.handleSelect,
+        'select-all': this.handleSelectAll
+      })
+    }
+  },
+  watch: {
+    data: function(val) {
+      this.$nextTick(() => {
+        if (val.length > 0 && this.selection.length > 0) {
+          val.forEach((row) => {
+            if (
+              this.selection.findIndex(
+                (item) => item[this.uniqueKey] === row[this.uniqueKey]
+              ) >= 0
+            ) {
+              this.$refs['table'].toggleRowSelection(row, true)
+            }
+          })
+        }
       })
     }
   },
@@ -200,9 +218,25 @@ export default {
     handleSizeChange(val) {
       this.$emit('page-size-change', val)
     },
-    handleSelectionChange(selection) {
-      this.selection = selection
-      this.$emit('selection-change', selection)
+    handleSelect(selection, row) {
+      if (selection.includes(row)) {
+        this.selection.push(row)
+      } else {
+        this.selection.splice(this.selection.indexOf(row), 1)
+      }
+    },
+    handleSelectAll(selection) {
+      let index
+      this.data.forEach((row) => {
+        index = this.selection.findIndex(
+          (item) => item[this.uniqueKey] === row[this.uniqueKey]
+        )
+        if (selection.length > 0 && index < 0) {
+          this.selection.push(row)
+        } else if (selection.length === 0 && index >= 0) {
+          this.selection.splice(index, 1)
+        }
+      })
     },
     // 高亮当前选中行
     rowClassName({ row }) {

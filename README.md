@@ -15,46 +15,48 @@
 
 ### Column Attributes
 
-除此之外支持所有el-table-column attributes
+除此之外支持所有 el-table-column attributes
 
-| 参数 | 说明                       |  类型   | 默认值 |
-| :--- | :------------------------- | :-----: | :----: |
-| slot | 开启slot支持，用于自定义列 | Boolean | false  |
+| 参数 | 说明                         |  类型   | 默认值 |
+| :--- | :--------------------------- | :-----: | :----: |
+| slot | 开启 slot 支持，用于自定义列 | Boolean | false  |
 
 ### Config Attributes
 
-除此之外支持所有el-table attributes
+除此之外支持所有 el-table attributes
 
-| 参数              | 说明                                |  类型   |                    默认值                    |
-| :---------------- | :---------------------------------- | :-----: | :------------------------------------------: |
-| enableMultiSelect | 是否支持多选                        | Boolean |                    false                     |
-| showHandler       | 是否显示操作列                      | Boolean |                    false                     |
-| handlerColumn     | 操作列配置，showHandler为true时有效 | Objext  | {label: '操作',minWidth: 100,fixed: 'right'} |
-| enablePagination  | 是否显示分页器                      | Boolean |                    false                     |
-| highlightSelect   | 是否高亮选中行，仅多选时有效        | Boolean |                     true                     |
+| 参数              | 说明                                   |  类型   |                    默认值                    |
+| :---------------- | :------------------------------------- | :-----: | :------------------------------------------: |
+| enableMultiSelect | 是否支持多选                           | Boolean |                    false                     |
+| showHandler       | 是否显示操作列                         | Boolean |                    false                     |
+| handlerColumn     | 操作列配置，showHandler 为 true 时有效 | Objext  | {label: '操作',minWidth: 100,fixed: 'right'} |
+| enablePagination  | 是否显示分页器                         | Boolean |                    false                     |
+| highlightSelect   | 是否高亮选中行，仅多选时有效           | Boolean |                     true                     |
+| uniqueKey         | 数据唯一 key, 开启多选时必须需         | String  |                      id                      |
 
 ### PageConfig Attributes
 
-除此之外支持所有el-pagination attributes
+除此之外支持所有 el-pagination attributes
 
-| 参数            | 说明                  |  类型  | 默认值 |
-| :-------------- | :-------------------- | :----: | :----: |
-| customClassName | 自定义分页器className | String |   -    |
-
+| 参数            | 说明                   |  类型  | 默认值 |
+| :-------------- | :--------------------- | :----: | :----: |
+| customClassName | 自定义分页器 className | String |   -    |
 
 ### Slot
 
-| name                   | 说明                                                              |          参数           |
-| :--------------------- | :---------------------------------------------------------------- | :---------------------: |
-| 列的prop值             | 自定义列的内容,当列的slot属性设置为true时有效                     | { row, column, $index } |
-| 列的prop值 + '-header' | 自定义表头的内容,当列的slot属性设置为true时有效                   |   { column, $index }    |
-| handler                | 自定义操作栏的内容                                                | { row, column, $index } |
-| multiSelectMenu        | 自定义多选操作列内容，enableMultiSelect为true时有效，勾选行时显示 |      { selection }      |
-| topMenu                | 自定义顶部操作 ，勾选行时不显示                                   |            -            |
+| name                     | 说明                                                                 |           参数           |
+| :----------------------- | :------------------------------------------------------------------- | :----------------------: |
+| 列的 prop 值             | 自定义列的内容,当列的 slot 属性设置为 true 时有效                    | { row, column, \$index } |
+| 列的 prop 值 + '-header' | 自定义表头的内容,当列的 slot 属性设置为 true 时有效                  |   { column, \$index }    |
+| handler                  | 自定义操作栏的内容                                                   | { row, column, \$index } |
+| multiSelectMenu          | 自定义多选操作列内容，enableMultiSelect 为 true 时有效，勾选行时显示 |      { selection }       |
+| topMenu                  | 自定义顶部操作，勾选行时不显示                                       |            -             |
 
 ### Events
 
-除此之外支持所有el-table events
+除此之外支持所有 el-table events
+
+注： 因为添加了跨分页多选的功能，el-table 原本的多选事件均已无法使用，包括：selection-change,select,selectAll
 
 | 事件名称            | 说明                     |   参数   |
 | :------------------ | :----------------------- | :------: |
@@ -63,4 +65,4 @@
 
 ### Methods
 
-支持所有el-table的methods
+支持所有 el-table 的 methods
