@@ -1,11 +1,11 @@
 <template>
-  <div :class="['page-wrap', customClassName ]">
+  <div :class="['page-wrap', customClassName]">
     <el-pagination
       :current-page="page.currentPage"
       :page-size="page.size"
       :total="page.total"
-      :page-sizes="pageSizes"
-      :layout="layout"
+      :page-sizes="_pageConfig.pageSizes"
+      :layout="_pageConfig.layout"
       v-bind="elAttrs"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
@@ -41,17 +41,20 @@ export default {
     }
   },
   computed: {
-    pageSizes() {
-      return this.pageConfig.pageSizes || [10, 20, 30, 50, 100]
-    },
-    layout() {
-      return this.pageConfig.layout || 'total,sizes,prev,pager,next,jumper,->'
+    _pageConfig() {
+      return Object.assign(
+        {
+          pageSizes: [10, 20, 30, 50, 100],
+          layout: 'total,sizes,prev,pager,next,jumper,->'
+        },
+        this.pageConfig
+      )
     },
     customClassName() {
-      return this.pageConfig.customClassName || ''
+      return this._pageConfig.customClassName || ''
     },
     elAttrs() {
-      const copy = deepClone(this.pageConfig)
+      const copy = deepClone(this._pageConfig_pageConfig)
       for (const key in copy) {
         if (
           Object.hasOwnProperty.call(copy, key) &&

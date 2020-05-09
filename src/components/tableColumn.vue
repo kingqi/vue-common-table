@@ -32,12 +32,15 @@ export default {
   props: {
     column: {
       type: Object,
-      default: () => ({})
+      default: () => ({ showOverflowTooltip: true })
     }
   },
   computed: {
+    _column() {
+      return Object.assign({ showOverflowTooltip: true }, this.column)
+    },
     elAttrs() {
-      const copy = deepClone(this.column)
+      const copy = deepClone(this._column)
       for (const key in copy) {
         if (
           Object.hasOwnProperty.call(copy, key) &&

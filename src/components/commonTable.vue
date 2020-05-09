@@ -2,7 +2,7 @@
   <div>
     <!--批量操作栏，勾选行时显示-->
     <div
-      v-if="enableMultiSelect && selection.length > 0"
+      v-if="_config.enableMultiSelect && selection.length > 0"
       class="multi-menu"
     >
       <span style="margin-left:12px;">已选中{{ selection.length }}项</span>
@@ -13,7 +13,7 @@
       />
       <i
         class="el-icon-close btn-close"
-        @click="selectionClear"
+        @click="clearSelection"
       />
     </div>
     <!--顶部操作栏占位，勾选行时不显示-->
@@ -31,12 +31,12 @@
       v-on="listeners"
     >
       <el-table-column
-        v-if="enableMultiSelect"
+        v-if="_config.enableMultiSelect"
         type="selection"
         width="55"
       />
       <el-table-column
-        v-if="showIndexColumn"
+        v-if="_config.showIndexColumn"
         type="index"
         width="50"
       />
@@ -66,7 +66,7 @@
         </template>
       </table-column>
       <el-table-column
-        v-if="showHandler"
+        v-if="_config.showHandler"
         v-bind="handlerColumn"
       >
         <slot
@@ -77,7 +77,7 @@
       </el-table-column>
     </el-table>
     <table-pagination
-      v-if="enablePagination"
+      v-if="_config.enablePagination"
       :page="page"
       :page-config="pageConfig"
       @size-change="handleSizeChange"
@@ -114,7 +114,8 @@ export default {
         enablePagination: false,
         highlightSelect: true,
         showIndexColumn: true,
-        uniqueKey: 'id'
+        uniqueKey: 'id',
+        tooltipEffect: 'dark'
       })
     },
     pageConfig: { type: Object, default: () => ({}) },
@@ -133,29 +134,20 @@ export default {
     }
   },
   computed: {
-    // 是否启用多选
-    enableMultiSelect() {
-      return this.config.enableMultiSelect || false
-    },
-    // 是否启用分页
-    enablePagination() {
-      return this.config.enablePagination || false
-    },
-    // 是否展示操作列
-    showHandler() {
-      return this.config.showHandler || false
-    },
-    // 是否高亮勾选行
-    highlightSelect() {
-      return this.config.highlightSelect !== false ? true : false
-    },
-    // 是否展示序号列
-    showIndexColumn() {
-      return this.config.showIndexColumn !== false ? true : false
-    },
-    // 数据唯一key
-    uniqueKey() {
-      return this.config.uniqueKey || 'id'
+    _config() {
+      return Object.assign(
+        {
+          enableMultiSelect: false,
+          showHandler: false,
+          handlerColumn: {},
+          enablePagination: false,
+          highlightSelect: true,
+          showIndexColumn: true,
+          uniqueKey: 'id',
+          tooltipEffect: 'dark'
+        },
+        this.config
+      )
     },
     // 操作列配置
     handlerColumn() {
@@ -165,12 +157,12 @@ export default {
           minWidth: 100,
           fixed: 'right'
         },
-        this.config.handlerColumn
+        this._config.handlerColumn
       )
     },
     // el-table组件属性
     elAttrs() {
-      const copy = deepClone(this.config)
+      const copy = deepClone(this._config)
       for (const key in copy) {
         if (
           Object.hasOwnProperty.call(copy, key) &&
@@ -179,7 +171,7 @@ export default {
           delete copy[key]
         }
       }
-      if (this.highlightSelect) {
+      if (this._config.highlightSelect) {
         Object.assign(copy, {
           'row-class-name': this.rowClassName
         })
@@ -195,13 +187,14 @@ export default {
     }
   },
   watch: {
+    // 如果当前数据有已被选中的则设置为已勾选
     data: function(val) {
       this.$nextTick(() => {
         if (val.length > 0 && this.selection.length > 0) {
           val.forEach((row) => {
             if (
               this.selection.findIndex(
-                (item) => item[this.uniqueKey] === row[this.uniqueKey]
+                (item) => item[this._config.uniqueKey] === row[this._config.uniqueKey]
               ) >= 0
             ) {
               this.$refs['table'].toggleRowSelection(row, true)
@@ -229,10 +222,12 @@ export default {
       let index
       this.data.forEach((row) => {
         index = this.selection.findIndex(
-          (item) => item[this.uniqueKey] === row[this.uniqueKey]
+          (item) => item[this._config.uniqueKey] === row[this._config.uniqueKey]
         )
+        // 全选时
         if (selection.length > 0 && index < 0) {
           this.selection.push(row)
+          // 全不选时
         } else if (selection.length === 0 && index >= 0) {
           this.selection.splice(index, 1)
         }
@@ -247,12 +242,9 @@ export default {
       }
       return ''
     },
-    selectionClear() {
-      this.selectionList = []
-      this.$refs['table'].clearSelection()
-    },
     clearSelection() {
-      return this.$refs['table'].clearSelection(...arguments)
+      this.selection = []
+      this.$refs['table'].clearSelection()
     },
     toggleRowSelection() {
       return this.$refs['table'].toggleRowSelection(...arguments)
