@@ -194,7 +194,8 @@ export default {
           val.forEach((row) => {
             if (
               this.selection.findIndex(
-                (item) => item[this._config.uniqueKey] === row[this._config.uniqueKey]
+                (item) =>
+                  item[this._config.uniqueKey] === row[this._config.uniqueKey]
               ) >= 0
             ) {
               this.$refs['table'].toggleRowSelection(row, true)
@@ -217,6 +218,7 @@ export default {
       } else {
         this.selection.splice(this.selection.indexOf(row), 1)
       }
+      this.$emit('select', this.selection, row)
     },
     handleSelectAll(selection) {
       let index
@@ -232,6 +234,7 @@ export default {
           this.selection.splice(index, 1)
         }
       })
+      this.$emit('select-all', this.selection)
     },
     // 高亮当前选中行
     rowClassName({ row }) {
