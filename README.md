@@ -1,6 +1,6 @@
 # vue-common-table
 
-基于 elementUI 封装的 table 组件，支持所有 elementUI table 组件配置项 [文档](https://element.eleme.cn/2.12/#/zh-CN/component/table)
+基于 elementUI 封装的 table 组件，支持所有 elementUI table 组件配置项 [文档](https://element.eleme.cn/2.12/#/zh-CN/component/table)，另外多选功能做了跨分页多选
 
 ### Attributes
 
@@ -33,6 +33,7 @@
 | enablePagination  | 是否显示分页器                         | Boolean |                    false                     |
 | highlightSelect   | 是否高亮选中行，仅多选时有效           | Boolean |                     true                     |
 | uniqueKey         | 数据唯一 key, 开启多选时必须需         | String  |                      id                      |
+| showIndexColumn   | 是否显示序号列                         | Boolean |                     true                     |
 
 ### PageConfig Attributes
 
