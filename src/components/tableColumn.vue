@@ -7,7 +7,8 @@
       slot-scope="scope"
       v-bind="scope"
     >
-      {{ scope.row[scope.column.property] }}
+      <!-- slot用于展开行时column为空 -->
+      {{ scope.column && scope.row[scope.column.property] }}
     </slot>
     <slot
       slot="header"
@@ -15,7 +16,7 @@
       name="header"
       v-bind="scope"
     >
-      {{ scope.column.label }}
+      {{ scope.column && scope.column.label }}
     </slot>
   </el-table-column>
   <el-table-column
