@@ -6,7 +6,6 @@
       :config="tableConfig"
       :page="page"
       :page-config="pageConfig"
-      @selection-change="handleSelectionChange"
       @current-page-change="handleCurrentPageChange"
     >
       <template
@@ -25,6 +24,11 @@
           placeholder="请输入名称"
           style="width:200px; "
         />
+      </template>
+      <template
+        slot="expand"
+      >
+        展开行
       </template>
       <template
         slot="name"
@@ -100,6 +104,11 @@ export default {
     return {
       columns: [
         {
+          prop: 'expand',
+          type: 'expand',
+          slot: true
+        },
+        {
           label: '日期',
           prop: 'date'
         },
@@ -115,6 +124,7 @@ export default {
       ],
       tableData: list[0],
       tableConfig: {
+        // showIndexColumn: false,
         showHandler: true,
         enableMultiSelect: true,
         enablePagination: true
@@ -124,15 +134,12 @@ export default {
         total: 6,
         currentPage: 1
       },
-      pageConfig:{
-        pageSizes:[3,6]
+      pageConfig: {
+        pageSizes: [3, 6]
       }
     }
   },
   methods: {
-    handleSelectionChange(val) {
-      console.log(val)
-    },
     handleSelectionClick(selection) {
       console.log('selection:', selection)
     },
