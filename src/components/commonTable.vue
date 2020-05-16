@@ -45,25 +45,20 @@
         :key="column.prop"
         :column="column"
       >
-        <template
+        <slot
           v-if="column.slot"
           slot-scope="props"
-        >
-          <slot
-            :name="column.prop"
-            v-bind="props"
-          />
-        </template>
-        <template
+          :name="column.prop"
+          v-bind="props"
+        />
+
+        <slot
           v-if="column.slot"
           slot="header"
           slot-scope="props"
-        >
-          <slot
-            :name="column.prop + '-header'"
-            v-bind="props"
-          />
-        </template>
+          :name="column.prop + '-header'"
+          v-bind="props"
+        />
       </table-column>
       <el-table-column
         v-if="_config.showHandler"
