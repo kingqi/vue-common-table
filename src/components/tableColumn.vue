@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import { deepClone } from '../utils/util'
 import { elTableColumnAttrs } from '../utils/config'
 
 export default {
@@ -41,13 +40,10 @@ export default {
       return Object.assign({ showOverflowTooltip: true }, this.column)
     },
     elAttrs() {
-      const copy = deepClone(this._column)
-      for (const key in copy) {
-        if (
-          Object.hasOwnProperty.call(copy, key) &&
-          !elTableColumnAttrs.includes(key)
-        ) {
-          delete copy[key]
+      const copy = {}
+      for (const key in this._column) {
+        if (elTableColumnAttrs.includes(key)) {
+          copy[key] = this._column[key]
         }
       }
       return copy

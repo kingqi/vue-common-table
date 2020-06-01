@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import { deepClone } from '../utils/util'
 import { elPageAttrs } from '../utils/config'
 
 export default {
@@ -54,13 +53,10 @@ export default {
       return this._pageConfig.customClassName || ''
     },
     elAttrs() {
-      const copy = deepClone(this._pageConfig_pageConfig)
-      for (const key in copy) {
-        if (
-          Object.hasOwnProperty.call(copy, key) &&
-          !elPageAttrs.includes(key)
-        ) {
-          delete copy[key]
+      const copy = {}
+      for (const key in this._pageConfig) {
+        if (elPageAttrs.includes(key)) {
+          copy[key] = this._pageConfig[key]
         }
       }
       return copy

@@ -82,7 +82,6 @@
 </template>
 
 <script>
-import { deepClone } from '../utils/util'
 import { elTableAttrs } from '../utils/config'
 
 export default {
@@ -157,13 +156,10 @@ export default {
     },
     // el-table组件属性
     elAttrs() {
-      const copy = deepClone(this._config)
-      for (const key in copy) {
-        if (
-          Object.hasOwnProperty.call(copy, key) &&
-          !elTableAttrs.includes(key)
-        ) {
-          delete copy[key]
+      const copy = {}
+      for (const key in this._config) {
+        if (elTableAttrs.includes(key)) {
+          copy[key] = this._config[key]
         }
       }
       if (this._config.highlightSelect) {
