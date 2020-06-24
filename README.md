@@ -32,7 +32,7 @@
 | handlerColumn     | 操作列配置，showHandler 为 true 时有效 | Objext  | {label: '操作',minWidth: 100,fixed: 'right'} |
 | highlightSelect   | 是否高亮选中行，仅多选时有效           | Boolean |                     true                     |
 | uniqueKey         | 数据唯一 key, 开启多选时必须需         | String  |                      id                      |
-| showIndexColumn   | 是否显示序号列                         | Boolean |                     true                     |
+| showIndexColumn   | 是否显示序号列                         | Boolean |                    false                     |
 
 ### PageConfig Attributes
 
