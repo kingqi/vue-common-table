@@ -72,7 +72,7 @@
       </el-table-column>
     </el-table>
     <table-pagination
-      v-if="_config.enablePagination"
+      v-if="page"
       :page="page"
       :page-config="pageConfig"
       @size-change="handleSizeChange"
@@ -105,7 +105,6 @@ export default {
         enableMultiSelect: false,
         showHandler: false,
         handlerColumn: {},
-        enablePagination: false,
         highlightSelect: true,
         showIndexColumn: true,
         uniqueKey: 'id',
@@ -115,11 +114,7 @@ export default {
     pageConfig: { type: Object, default: () => ({}) },
     page: {
       type: Object,
-      default: () => ({
-        currentPage: 1,
-        size: 3,
-        total: 0
-      })
+      default: () => null
     }
   },
   data() {
@@ -134,9 +129,8 @@ export default {
           enableMultiSelect: false,
           showHandler: false,
           handlerColumn: {},
-          enablePagination: false,
           highlightSelect: true,
-          showIndexColumn: true,
+          showIndexColumn: false,
           uniqueKey: 'id',
           tooltipEffect: 'dark'
         },

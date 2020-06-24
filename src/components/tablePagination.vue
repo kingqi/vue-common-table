@@ -10,14 +10,6 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
-    <div class="page-button">
-      <el-button
-        size="mini"
-        type="primary"
-      >
-        跳转
-      </el-button>
-    </div>
   </div>
 </template>
 
@@ -44,7 +36,7 @@ export default {
       return Object.assign(
         {
           pageSizes: [10, 20, 30, 50, 100],
-          layout: 'total,sizes,prev,pager,next,jumper,->'
+          layout: 'total,prev,pager,next,sizes,jumper,->'
         },
         this.pageConfig
       )
@@ -79,8 +71,5 @@ export default {
   align-items: center;
   justify-content: flex-end;
   margin-top: 12px;
-}
-.page-button {
-  margin-left: 12px;
 }
 </style>

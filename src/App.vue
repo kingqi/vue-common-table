@@ -103,11 +103,11 @@ export default {
   data() {
     return {
       columns: [
-        {
-          prop: 'expand',
-          type: 'expand',
-          slot: true
-        },
+        // {
+        //   prop: 'expand',
+        //   type: 'expand',
+        //   slot: true
+        // },
         {
           label: '日期',
           prop: 'date'
@@ -127,7 +127,6 @@ export default {
         // showIndexColumn: false,
         showHandler: true,
         enableMultiSelect: true,
-        enablePagination: true
       },
       page: {
         size: 3,
