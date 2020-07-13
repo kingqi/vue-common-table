@@ -83,11 +83,13 @@
 
 <script>
 import { elTableAttrs } from '../utils/config'
+import tableColumn from './tableColumn'
+import tablePagination from './tablePagination'
 
 export default {
   components: {
-    tableColumn: () => import('./tableColumn'),
-    tablePagination: () => import('./tablePagination')
+    tableColumn,
+    tablePagination
   },
   props: {
     data: {
@@ -101,15 +103,7 @@ export default {
     loading: Boolean,
     config: {
       type: Object,
-      default: () => ({
-        enableMultiSelect: false,
-        showHandler: false,
-        handlerColumn: {},
-        highlightSelect: true,
-        showIndexColumn: true,
-        uniqueKey: 'id',
-        tooltipEffect: 'dark'
-      })
+      default: () => ({})
     },
     pageConfig: { type: Object, default: () => ({}) },
     page: {
