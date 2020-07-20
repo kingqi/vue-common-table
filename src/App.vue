@@ -25,9 +25,7 @@
           style="width:200px; "
         />
       </template>
-      <template
-        slot="expand"
-      >
+      <template slot="expand">
         展开行
       </template>
       <template
@@ -126,7 +124,7 @@ export default {
       tableConfig: {
         // showIndexColumn: false,
         showHandler: true,
-        enableMultiSelect: true,
+        enableMultiSelect: true
       },
       page: {
         size: 3,

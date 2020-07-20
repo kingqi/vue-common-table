@@ -42,3 +42,23 @@ export const deepClone = (data) => {
   }
   return obj
 }
+
+/**
+ * 对象取值
+ * @param {Object} obj
+ * @param {String} path
+ */
+export const get = (obj, path, defaultValue) => {
+  var paths = path.split('.'),
+    current = obj,
+    i
+
+  for (i = 0; i < paths.length; ++i) {
+    if (current[paths[i]] == undefined) {
+      return defaultValue
+    } else {
+      current = current[paths[i]]
+    }
+  }
+  return current
+}

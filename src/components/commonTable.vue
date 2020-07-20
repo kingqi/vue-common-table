@@ -18,7 +18,7 @@
     </div>
     <!--顶部操作栏占位，勾选行时不显示-->
     <div
-      v-else
+      v-else-if="_config.enableMultiSelect || $slots.topMenu"
       class="top-menu"
     >
       <slot name="topMenu" />
@@ -83,10 +83,12 @@
 
 <script>
 import { elTableAttrs } from '../utils/config'
+import { get } from '../utils/util'
 import tableColumn from './tableColumn'
 import tablePagination from './tablePagination'
 
 export default {
+  name: 'CommonTable',
   components: {
     tableColumn,
     tablePagination
@@ -125,7 +127,6 @@ export default {
           handlerColumn: {},
           highlightSelect: true,
           showIndexColumn: false,
-          uniqueKey: 'id',
           tooltipEffect: 'dark'
         },
         this.config
@@ -173,8 +174,7 @@ export default {
           val.forEach((row) => {
             if (
               this.selection.findIndex(
-                (item) =>
-                  item[this._config.uniqueKey] === row[this._config.uniqueKey]
+                (item) => this._getRowKey(item) === this._getRowKey(row)
               ) >= 0
             ) {
               this.$refs['table'].toggleRowSelection(row, true)
@@ -185,6 +185,16 @@ export default {
     }
   },
   methods: {
+    _getRowKey(row) {
+      const config = this._config
+      if (typeof config.rowKey === 'function') {
+        return config.rowKey(row)
+      } else if (typeof config.rowKey === 'string') {
+        return get(row, config.rowKey)
+      } else {
+        return row.id
+      }
+    },
     handleCurrentChange(val) {
       this.$emit('current-page-change', val)
     },
@@ -203,7 +213,7 @@ export default {
       let index
       this.data.forEach((row) => {
         index = this.selection.findIndex(
-          (item) => item[this._config.uniqueKey] === row[this._config.uniqueKey]
+          (item) => this._getRowKey(item) === this._getRowKey(row)
         )
         // 全选时
         if (selection.length > 0 && index < 0) {
