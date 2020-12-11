@@ -2,7 +2,11 @@
   <div>
     <!--批量操作栏，勾选行时显示-->
     <div
-      v-if="_config.enableMultiSelect && selection.length > 0"
+      v-if="
+        _config.enableMultiSelect &&
+          selection.length > 0 &&
+          $slots.multiSelectMenu
+      "
       class="multi-menu"
     >
       <span style="margin-left:12px;">已选中{{ selection.length }}项</span>
