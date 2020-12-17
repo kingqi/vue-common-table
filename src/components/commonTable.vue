@@ -5,7 +5,7 @@
       v-if="
         _config.enableMultiSelect &&
           selection.length > 0 &&
-          $slots.multiSelectMenu
+          $scopedSlots.multiSelectMenu
       "
       class="multi-menu"
     >
@@ -22,7 +22,10 @@
     </div>
     <!--顶部操作栏占位，勾选行时不显示-->
     <div
-      v-else-if="_config.enableMultiSelect || $slots.topMenu"
+      v-else-if="
+        (_config.enableMultiSelect && $scopedSlots.multiSelectMenu) ||
+          $scopedSlots.topMenu
+      "
       class="top-menu"
     >
       <slot name="topMenu" />
@@ -188,6 +191,7 @@ export default {
       })
     }
   },
+  mounted() {},
   methods: {
     _getRowKey(row) {
       const config = this._config

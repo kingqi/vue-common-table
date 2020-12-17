@@ -1,13 +1,13 @@
 import { Pagination, TableColumn } from 'element-ui'
 import Vue from 'vue'
 
-export interface Page {
+export type Page = {
   currentPage: number
   size: number
   total: number
 }
 
-export interface Config {
+export type Config = {
   /* 是否支持多选 */
   enableMultiSelect: boolean
   /** 是否显示操作列 */
@@ -20,17 +20,17 @@ export interface Config {
   showIndexColumn: boolean
 }
 
-export interface PageConfig extends Pagination {
+export class PageConfig extends Pagination {
   /* 是否支持多选 */
   customClassName?: string
 }
 
-export interface Column extends TableColumn {
+export class Column extends TableColumn {
   /** 开启 slot 支持，用于自定义列 */
   slot: boolean
 }
 
-export default class CommonTable extends Vue {
+export declare class CommonTable extends Vue {
   /* table data source */
   data: object[]
   /* config for every column */

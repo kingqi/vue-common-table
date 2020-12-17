@@ -1,6 +1,6 @@
 {
   "name": "vue-common-table",
-  "version": "1.0.10",
+  "version": "1.0.13",
   "license": "MIT",
   "author": "Louis <liukangqi56@gmail.com>",
   "main": "./lib/common-table.umd.min.js",
