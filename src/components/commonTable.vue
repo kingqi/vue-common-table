@@ -72,9 +72,9 @@
         v-bind="handlerColumn"
       >
         <slot
-          slot-scope="{ row }"
+          slot-scope="props"
           name="handler"
-          :row="row"
+          v-bind="props"
         />
       </el-table-column>
     </el-table>
