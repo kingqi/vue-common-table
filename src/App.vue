@@ -21,6 +21,7 @@
       </template>
       <template slot="topMenu">
         <el-input
+          v-model="search"
           placeholder="请输入名称"
           style="width:200px; "
         />
@@ -126,6 +127,7 @@ export default {
         showHandler: true,
         enableMultiSelect: true
       },
+      search: '',
       page: {
         size: 3,
         total: 6,
@@ -133,6 +135,15 @@ export default {
       },
       pageConfig: {
         pageSizes: [3, 6]
+      }
+    }
+  },
+  watch: {
+    search(val) {
+      if (val) {
+        this.tableData = []
+      } else {
+        this.tableData = list[1]
       }
     }
   },
