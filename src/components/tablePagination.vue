@@ -1,7 +1,7 @@
 <template>
   <div :class="['page-wrap', customClassName]">
     <el-pagination
-      :current-page="page.currentPage"
+      :current-page.sync="page.currentPage"
       :page-size="page.size"
       :total="page.total"
       :page-sizes="_pageConfig.pageSizes"
